@@ -57,7 +57,7 @@ static int wolfssl_server_ctx_new(WOLFSSL_CTX** ctx)
     }
 
     if (ret == 0) {
-        /* Load client certificates into WOLFSSL_CTX */
+        /* Load server certificate into WOLFSSL_CTX */
         if (wolfSSL_CTX_use_certificate_buffer(server_ctx, SERVER_CERT,
                 SERVER_CERT_LEN, WOLFSSL_FILETYPE_ASN1) != WOLFSSL_SUCCESS) {
             printf("ERROR: failed to load server certificate\n");
@@ -66,7 +66,7 @@ static int wolfssl_server_ctx_new(WOLFSSL_CTX** ctx)
     }
 
     if (ret == 0) {
-        /* Load client certificates into WOLFSSL_CTX */
+        /* Load server key into WOLFSSL_CTX */
         if (wolfSSL_CTX_use_PrivateKey_buffer(server_ctx, SERVER_KEY,
                 SERVER_KEY_LEN, WOLFSSL_FILETYPE_ASN1) != WOLFSSL_SUCCESS) {
             printf("ERROR: failed to load server key\n");
@@ -78,7 +78,7 @@ static int wolfssl_server_ctx_new(WOLFSSL_CTX** ctx)
         wolfSSL_CTX_set_verify(server_ctx, WOLFSSL_VERIFY_PEER |
                                         WOLFSSL_VERIFY_FAIL_IF_NO_PEER_CERT, 0);
 
-        /* Load server certificates into WOLFSSL_CTX */
+        /* Load client certificates into WOLFSSL_CTX */
         if (wolfSSL_CTX_load_verify_buffer(server_ctx, CLIENT_CERT,
                 CLIENT_CERT_LEN, WOLFSSL_FILETYPE_ASN1) != WOLFSSL_SUCCESS) {
             printf("ERROR: failed to load CA certificate\n");
